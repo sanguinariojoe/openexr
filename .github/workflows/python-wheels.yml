@@ -23,7 +23,7 @@ jobs:
         cd .. &&
         echo "Installing libDeflate..." &&
         cd libdeflate.build &&
-        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DCMAKE_INSTALL_LIBDIR=lib -DLIBDEFLATE_BUILD_SHARED_LIB=OFF -DLIBDEFLATE_USE_SHARED_LIB=OFF -DBUILD_SHARED_LIBS=OFF ../libdeflate &&
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DCMAKE_INSTALL_LIBDIR=lib -DLIBDEFLATE_BUILD_SHARED_LIB=OFF -DLIBDEFLATE_USE_SHARED_LIB=OFF -DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=1 ../libdeflate &&
         cmake --build ./ --config Release --clean-first &&
         cmake --install ./ --config Release &&
         cd .. &&
@@ -90,10 +90,6 @@ jobs:
             tar -xvzf v1.18.tar.gz -C ${{github.workspace}}/
             mv libdeflate-1.18 libdeflate
             rm v1.18.tar.gz
-
-      - name: Patch libDeflate
-        run: |
-            patch -u libdeflate/CMakeLists.txt -i ${{github.workspace}}/src/wrappers/python/libdeflate.patch
 
       - name: download Imath source code
         uses: suisei-cn/actions-download-file@v1.4.0
