@@ -43,7 +43,7 @@ jobs:
     env:
       # Skip 32-bit wheels builds.
       # Also skip the PyPy builds, since they fail the unittests
-      CIBW_SKIP: "*-win32 *_i686 pp*"
+      CIBW_SKIP: "*-win32 pp*"
       CIBW_BEFORE_BUILD: >
         echo "Installing OpenEXR..." &&
         cd openexr.build &&
