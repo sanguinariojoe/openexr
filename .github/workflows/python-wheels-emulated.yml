@@ -66,6 +66,7 @@ jobs:
               echo "CIBW_TEST_REQUIRES=pytest" >> "$GITHUB_ENV"
               echo 'CIBW_TEST_COMMAND=pytest {project}/src/wrappers/python/tests/' >> "$GITHUB_ENV"
           fi
+        shell: bash
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
