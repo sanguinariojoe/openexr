@@ -24,7 +24,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [${{inputs.os}}]
+        os: [ ${{ inputs.os }} ]
     env:
       # Skip 32-bit wheels builds.
       # Also skip the PyPy builds, since they fail the unittests
