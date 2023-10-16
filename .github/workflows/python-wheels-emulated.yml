@@ -7,7 +7,7 @@ on:
         description: 'Host OS'
         required: false
         type: string
-        default: 'ubuntu-22.04'
+        default: '["ubuntu-22.04"]'
       test:
         description: 'Whether the tests shall be run or not'
         required: false
@@ -24,7 +24,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ${{ fromJSON(github.event.inputs.OS) }}
+        os: ${{ fromJSON(github.event.inputs.os) }}
     env:
       # Skip 32-bit wheels builds.
       # Also skip the PyPy builds, since they fail the unittests
