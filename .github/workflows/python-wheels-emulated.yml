@@ -24,12 +24,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [{{inputs.os}}]
+        os: [${{inputs.os}}]
     env:
       # Skip 32-bit wheels builds.
       # Also skip the PyPy builds, since they fail the unittests
       CIBW_SKIP: "*-win32 pp*"
-      CIBW_ARCHS: {{inputs.arch}}
+      CIBW_ARCHS: ${{inputs.arch}}
       CIBW_BEFORE_ALL: >
         echo "Installing OpenEXR..." &&
         mkdir -p ${{github.workspace}}/openexr.build
@@ -62,7 +62,7 @@ jobs:
 
       - name: Set test env vars
         run: |
-          if [[ {{inputs.test}} == 'true' ]]; then
+          if [[ ${{inputs.test}} == 'true' ]]; then
               echo "CIBW_TEST_REQUIRES=pytest" >> "$GITHUB_ENV"
               echo 'CIBW_TEST_COMMAND=pytest {project}/src/wrappers/python/tests/' >> "$GITHUB_ENV"
           fi
